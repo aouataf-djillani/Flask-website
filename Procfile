@@ -1,1 +1,1 @@
-web: gunicorn pageWeb:Kards10
+web: gunicorn pageWeb:app
