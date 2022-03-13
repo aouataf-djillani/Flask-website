@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>How to scrape Q&As from a website? </title>
+	<link rel="stylesheet" href="static/css/article.css">
+
+
+</head>
+<body>
+
+<article>
+	<h1>How to scrape Q&As from a website?</h1>
+	<header><strong>A four step guide to web-scrape NLP interview questions and answers</strong></header>
+	<img src="/static/images/webscraping.jpeg">
+
+	<p>
+		Scraping data from websites has never been easier. Today, we are going to extract NLP interview Q&As from a website. This kind of scraped data could be used as a cheat sheet for future job interviews or as a dataset to train a chatbot that speaks NLP!
+	</p>
+
+
+	<h2>Libraries used for Web scraping</h2>
+	<p>As we all know, python offers a variety of libraries that help access websites’ content, extract their data and save it to the format of your choice.  In this article, we will be using the following libraries : 
+		<ul>
+<li><strong>Requests:</strong>  requests is a library used to request access to the website’s content.</li>
+<li><strong>BeautifulSoup:</strong>  bs4 is a package for parsing HTML and XML documents and extracting their data.</li>
+<li><strong>Pandas:</strong> Pandas is used to structure the extracted data and store it to many formats.</li>
+        </ul></p>
+    <h2>Finding the right data sources</h2>
+    <p>While choosing the website that contains useful data for any type of project, the first question we need to ask ourselves should be : 
+Is it legal to scrape data from this website ? 
+Here, we are going to scrape  « Machine Learning Interviews website » to extract the questions, and answers in NLP interviews. The URL for this page is : https://machinelearninginterview.com/natural-language-processing-interview-questions/  
+It is very important to check Whether this website allows data scraping or not. This type of information is found in the website’s “robots.txt” file. All we  need to do is append “/robots.txt” to the URL of the website we want to scrape. </p>
+<p>After that, we can inspect the web page to see, under which html tag the data we want to scrape is nested by right clicking on the element and then clicking on “Inspect”. In our case, the questions are nested in the <a> tag and the answers are inside the "div" tag. Both "div" and "a" are nested in the "li" tag. </p>
+<img src="/static/images/inspect.jpg">
+
+<h2>Getting Started</h2>
+<h3>Step 1 – import the libraries</h3>
+
+<p>Let’s import all the libraries mentioned above :</p>
+<pre>import requests
+import re
+from bs4 import BeautifulSoup
+import pandas as pd</pre>
+<h3>Step 2 – request and access content</h3>
+<p>Using the request.get() method, we get to open the URL and then get its content.</p>
+<pre>r= requests.get("https://machinelearninginterview.com/natural-language-processing-interview-questions/")
+c= r.content</pre>
+<h3>Step 3 – parse and extract with BeautifulSoup</h3>
+<p>Now that we have access to the URL content, it’s time to extract the questions and answers from the website. As mentioned earlier, the questions  are nested in "a" tags under the attribute « title », which are all nested in "li" tags.</p>
+<p>The answers are nested in the "div" tag under the class name « lcp_excerpt »So, we will find the div tags with that respective class-name, extract the text. </p>
+<p>All the answers and questions are then stored in the nlp dictionary that we created beforehand . Refer the code below:</p>
+<pre>soup = BeautifulSoup(c, "html.parser")
+nlp={"Questions":[], "Answers":[]}
+lis=soup.find_all("li")
+for li in lis:
+    q=li.find("a").get("title")
+    if q!=None:
+        nlp["Questions"].append(q)
+div= soup.find_all("div", {"class":"lcp_excerpt"})
+for a in div:
+    if a!=None:
+        nlp["Answers"].append(a.text)</pre>
+<h3>Step 4 – Store the data in a required format</h3>
+
+<p>Here we saved the extracted data to dataframe and stored it in a csv file using pandas</p>
+<pre>df=pd.DataFrame(nlp)
+df.to_csv("nlpqa.csv")
+print("data saved to csv")</pre>
+<p>Now, running our code will create a CSV file named « nlpqa.csv » that contains our scraped data <br> Tada!</p>
+
+	<blockquote>
+		<p></p>
+	</blockquote>
+
+	<figure>
+		<img src="">
+	</figure>
+
+
+</article>
+</body>
+</html>

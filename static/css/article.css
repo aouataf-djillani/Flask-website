@@ -1,0 +1,120 @@
+article{
+	display: grid;
+	grid-template-columns: 0.5fr 1fr 10px 640px 10px 1fr 0.5fr;
+}
+html, body{
+	margin: 0;
+	padding: 0;
+	line-height: 1.4;
+
+}
+article > *{
+	min-width: 0;
+	grid-column: 4;
+
+}
+article > figure{
+	grid-column: 1/ -1;
+	margin: 20px 0;
+
+}
+article > blockquote {
+	grid-column: 3/span 2;
+	margin: 0px 0;
+	color: #666;
+	border-left: 3 px solid black;
+	padding-left: 10px;
+}
+article > h1{
+	font-family: Lucida Grande;
+	font-size: 42px ;
+	text-align: center;
+	
+}
+
+article > p{
+	--x-height-multiplier: 0.375;
+	--baseline-multiplier: 0.17;
+	font-family: Georgia, Cambria, "times News Roman", Times, serif ;
+	letter-spacing: .01rem;
+	font-weight:400;
+	font-style: normal;
+	font-size: 21 px;
+	line-height: 1.58;
+	letter-spacing: -.003em;
+	color: rgba(0, 0, 0, .84);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+article > .aside {
+	font-family: Lucida Grande;
+	margin: 30px 20px;
+	color: #6660;
+	font-size: 0.8em;
+	grid-column: 5/ -1;
+
+}
+img {
+	width: 100%;
+}
+
+.line-number a{
+	text-decoration:none ;
+	color: #000;
+	padding-right: lem;
+}
+
+code{
+	background: #eee;
+	padding: 2px 5px;
+
+}
+pre{
+	background: #eee;
+	padding: 10px 15 px;
+	overflow: auto;
+}
+pre> code {
+	padding: 0;
+
+}
+figure {
+	margin: 0;
+}
+
+figure figcaption{
+	color: #666;
+	font-style: italic;
+	font-size: 0.8em;
+}
+
+pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #f36d33;
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+}
+
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+h3 {
+  text-align: justify;
+  text-justify: inter-word;
+}
+header {
+	text-align: center;
+}

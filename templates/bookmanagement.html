@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Book Management System With Simple User Graphical Interface </title>
+	<link rel="stylesheet" href="static/css/article.css">
+
+
+</head>
+<body>
+
+<article>
+	<h1>Book Management System With Simple User Graphical Interface </h1>
+	<header><strong>Building a GUI to create and manage a book database using Tkinter and SQLite3</strong></header>
+	<img src="/static/images/books.jpg">
+
+	<p>
+		In this article, we are creating a simple tool for managing book details. This tool could be used to organize and maintain a personal book library.
+The main purpose of this article is to demonstrate the creation of a simple graphical user interface (GUI) with Tkinter library  and to establish a backend connection to SQL databases in order to manage data and to reflect changes on the frontend.
+	</p>
+
+
+	<h2>Required libraries</h2>
+
+<ul>
+	
+<li><strong>SQLite3: </strong>used to interact with sql databases. It provides an SQL interface.</li>
+<li><strong>Tkinter:</strong>tkinter is the strandard built-in GUI framework for Python. It provides an easy way to create GUI applications.</li>
+</ul>
+    <h2>Architecture</h2>
+    <p>In order to access information about the book list we are managing, our SQL database should contain details such as book title, author, published year and ISBN. (Another useful information could be  our reading progress).
+ </p>
+<p>Our application should enable the user to access the database and interact with it using a series of functionalities  that could be executed using SQL: </p>
+<ul>
+<li>Viewing the book list</li>
+<li>Searching for a book</li>
+<li>Adding a new book to the collection</li>
+<li>updating information</li>
+<li>Deleting a book</li>
+</ul>
+<p>Our goal here then is to create a connection to our database in the backend, implemeint our functionalities using mysql and connecting each functionality to the right button in our frontend.</p>
+<h2>Front-end</h2>
+
+
+<p>Our GUI will contains the following tkinter elements:</p>
+<table border="1">
+	<tr>
+		<td><strong>Entries</strong></td>
+		<td>Textboxes for title, author, year and isbn</td>
+	</tr>
+	<tr>
+		<td><strong>Labels</strong></td>
+		<td>Each entry will be supported with a label</td>
+	</tr>
+	<tr>		
+		<td><strong>Buttons</strong></td>
+
+		<td>Each function will be executed by clicking on a certain button</td>
+	</tr>
+	<tr>
+		<td><strong>Listbox</strong></td>
+		<td>Provides a view of our database elements</td>
+	</tr>
+	<tr>
+		<td><strong>Scrollbar</strong></td>
+		<td>Allows navigation through the list</td>
+	</tr>
+</table>
+
+<img src="/static/images/frontend.png">
+<h2>Back-end</h2>
+<p>The backend takes care of performing the SQL tasks triggered by the operations in the frontend. IT contains the following functions : </p>
+<ol>
+<li><strong>Add Entry :</strong>adds a new row (a tuple) into the SQL table. This tuple consists of the entries given by the user : name, author, year and isbn. <br> <pre>(“INSERT INTO book VALUES (NULL,?,?,?, ?)”, (title, author,year, isbn,))</pre> </li>
+<li><strong>View all :</strong>displays all the rows that are present in the table.<br> <pre>("SELECT * from book WHERE UPPER(title)=UPPER(?) OR UPPER(author)=UPPER(?) OR UPPER(year)=UPPER(?) or UPPER(isbn)=UPPER(?)",(title,author, year, isbn))</pre> </li>
+
+<li><strong>Search entry :</strong>displays the rows given search entries typed by the user. <br> <pre>(“INSERT INTO book VALUES (NULL,?,?,?,?)”, (title, author,year, isbn,))</pre> <br> *Using UPPER enables the user to perform case insensitive search. </li>
+
+<li><strong>Update :</strong>Given a new value (enty) given by the user, the row is updated. <br> <pre>"Update book SET title=?,author=?,year=?,isbn=? where id=?",(title,author,year,isbn,id))</pre> </li>
+
+<li><strong>Delete :</strong>deletes the row that is selected from the table based on the index of the selected row.<br> <pre>("DELETE FROM book WHERE id=?",(id,))</pre> </li>
+</ol>
+<p>Check out the full source code 
+<a href="https://github.com/aouataf-djillani/Desktop_app_sql_tkinter">here!</a>
+</p>
+	
+
+</article>
+</body>
+</html>
