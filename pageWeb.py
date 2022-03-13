@@ -1,25 +1,30 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_mail import Mail, Message
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextField, validators
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,validators
 from wtforms.validators import DataRequired
+import local_settings
+
 mail = Mail()
 app = Flask(__name__)
 app.secret_key ="devkey"
 
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config["MAIL_USE_SSL"] = True
-app.config["MAIL_USERNAME"] = 'aouataf.djillani@gmail.com'
-app.config["MAIL_PASSWORD"] = 'nrekeblekchok94'
+app.config.update(
+
+MAIL_SERVER = "smtp.gmail.com",
+MAIL_PORT = 465,
+MAIL_USE_SSL= True,
+MAIL_USERNAME= 'aouataf.djillani@gmail.com',
+MAIL_PASSWORD = local_settings.MAIL_PASSWORD
+)
 
 mail.init_app(app)
 
 class ContactForm(FlaskForm):
 
-    name = TextField("Name", [validators.DataRequired("your name")],render_kw={"placeholder": "Your name"})
-    email = TextField("Email", [validators.DataRequired("your email")],render_kw={"placeholder": "Youe email"})
-    message = TextField("Message",[validators.DataRequired("leave your message")],render_kw={"placeholder": "Your message"})
+    name = StringField("Name", [validators.DataRequired("your name")],render_kw={"placeholder": "Your name"})
+    email = StringField("Email", [validators.DataRequired("your email")],render_kw={"placeholder": "Youe email"})
+    message = StringField("Message",[validators.DataRequired("leave your message")],render_kw={"placeholder": "Your message"})
     subject = StringField("Subject", [validators.Optional()],render_kw={"placeholder": "Optional "})
     submit = SubmitField("SUBMIT")
 
