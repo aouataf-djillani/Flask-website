@@ -8,7 +8,7 @@ import local_settings
 mail = Mail()
 app = Flask(__name__)
 app.secret_key ="devkey"
-
+# mail setup 
 app.config.update(
 
 MAIL_SERVER = "smtp.gmail.com",
@@ -20,6 +20,7 @@ MAIL_PASSWORD = local_settings.MAIL_PASSWORD
 
 mail.init_app(app)
 
+# contact form setup 
 class ContactForm(FlaskForm):
 
     name = StringField("Name", [validators.DataRequired("your name")],render_kw={"placeholder": "Your name"})
@@ -28,11 +29,12 @@ class ContactForm(FlaskForm):
     subject = StringField("Subject", [validators.Optional()],render_kw={"placeholder": "Optional "})
     submit = SubmitField("SUBMIT")
 
-
+# home page 
 @app.route('/', methods=['GET','POST'])
 def index():
 	form = ContactForm()
 	return render_template('index.html', form=form)
+# contact section 
 @app.route('/#contact', methods=['GET','POST'])
 def contact():
     form = ContactForm()
@@ -52,6 +54,7 @@ def contact():
         	return "Form posted"
     if request.method == 'GET':
         return render_template('index.html', form=form)
+# Articles from the project section 
 @app.route('/web-scraping')
 def scrape():
 	return render_template('webScraping.html')
