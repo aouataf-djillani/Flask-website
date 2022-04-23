@@ -32,7 +32,7 @@ article > h1{
 	
 }
 
-article > p{
+/*article > p{
 	--x-height-multiplier: 0.375;
 	--baseline-multiplier: 0.17;
 	font-family: Georgia, Cambria, "times News Roman", Times, serif ;
@@ -45,7 +45,7 @@ article > p{
 	color: rgba(0, 0, 0, .84);
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
-}
+}*/
 
 article > .aside {
 	font-family: Lucida Grande;
@@ -96,7 +96,7 @@ pre {
     color: #666;
     page-break-inside: avoid;
     font-family: monospace;
-    font-size: 15px;
+    font-size: 12px;
     line-height: 1.6;
     margin-bottom: 1.6em;
     max-width: 100%;
@@ -107,14 +107,43 @@ pre {
 }
 
 p {
-  text-align: justify;
+text-align: justify;
   text-justify: inter-word;
+    font-family: Georgia, Cambria, "times News Roman", Times, serif ;
+--x-height-multiplier: 0.375;
+	--baseline-multiplier: 0.17;
+	letter-spacing: .01rem;
+	font-weight:400;
+	font-style: normal;
+	font-size: 24 px;
+	line-height: 1.58;
+	letter-spacing: -.003em;
+	color: rgba(0, 0, 0, .84);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+ul {
+text-align: justify;
+  text-justify: inter-word;
+    font-family: Georgia, Cambria, "times News Roman", Times, serif ;
+--x-height-multiplier: 0.375;
+	--baseline-multiplier: 0.17;
+	letter-spacing: .01rem;
+	font-weight:400;
+	font-style: normal;
+	font-size: 24 px;
+	line-height: 1.58;
+	letter-spacing: -.003em;
+	color: rgba(0, 0, 0, .84);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
 }
 
 h3 {
   text-align: justify;
   text-justify: inter-word;
+
 }
-header {
+h4 {
 	text-align: center;
 }
