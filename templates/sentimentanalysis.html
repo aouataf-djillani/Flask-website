@@ -2,36 +2,36 @@
 
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Semantic Aalysis using VADER </title>
-	<link rel="stylesheet" href="static/css/article.css">
+    <meta charset="utf-8">
+    <title>Semantic Analysis using VADER </title>
+    <link rel="stylesheet" href="static/css/article.css">
 
 
 </head>
 <body>
 
 <article>
-	<h1>Semantic Aalysis using VADER </h1>
-	<header><strong>An easy guide to perform sentiment analysis on Amazon reviews using VADER (Valence Aware Dictionary and sEntiment Reasoner)</strong></header>
-	<img src="/static/images/sentiment/senti.jpg">
+    <h1>Semantic Analysis using VADER </h1>
+    <header><strong>An easy guide to perform sentiment analysis on Amazon reviews using VADER (Valence Aware Dictionary and sEntiment Reasoner)</strong></header>
+    <img src="/static/images/sentiment/senti.jpg">
 
-	<p>
-		In this article we are going to perform sentiment analysis using an unsupervised machine learning method. We will be applying the VADER (Valence Aware Dictionary for sEntiment Reasoning), a sentiment intensity analyser implemented in NLTK to analyse our unlabeled  dataset which is a set of amazon reviews. This tool gives us the polarity score (negative, positive, neutral or compound). Finally, we’ll be using scikit-learn to evaluate the accuracy of our result and to show the classification report and the confusion matrix by comparing our classification results with a gold standard (manual labels). 
-	</p>
+    <p>
+        In this article we are going to perform sentiment analysis using an unsupervised machine learning method. We will be applying the VADER (Valence Aware Dictionary for sEntiment Reasoning), a sentiment intensity analyser implemented in NLTK to analyse our unlabeled  dataset which is a set of amazon reviews. This tool gives us the polarity score (negative, positive, neutral or compound). Finally, we’ll be using scikit-learn to evaluate the accuracy of our result and to show the classification report and the confusion matrix by comparing our classification results with a gold standard (manual labels).
+    </p>
 
 
-	<h2>Sentiment Analysis</h2>
-	<p>Sentiment Analysis is a natural langage processing task that consists of automatically or computationally determining whether a piece of text is positive, negative or neutral. It is also known as opinion mining, as it analyses the opinion of a speaker.</p>
-		
+    <h2>Sentiment Analysis</h2>
+    <p>Sentiment Analysis is a natural language processing task that consists of automatically or computationally determining whether a piece of text is positive, negative or neutral. It is also known as opinion mining, as it analyses the opinion of a speaker.</p>
+        
     <h2>Vader</h2>
-    <p>ADER (Valence Aware Dictionary and sEntiment Reasoner) is a lexicon and rule-based sentiment analysis tool. VADER uses a combination of  sentiment lexicon ; a list of lexical features (e.g., words) which are generally labeled according to their semantic orientation as either positive or negative. What Vader sentiment intensity analyser does is , take in a string and return a dictionary of score in 4 categories : negative, positive, neutral and a compound score ; which  is computed by normalizing these scores. </p>
+    <p>ADER (Valence Aware Dictionary and sEntiment Reasoner) is a lexicon and rule-based sentiment analysis tool. VADER uses a combination of  sentiment lexicon ; a list of lexical features (e.g., words) which are generally labeled according to their semantic orientation as either positive or negative. What Vader sentiment intensity analyser does is , take in a string and return a dictionary of scores in four categories : negative, positive, neutral and a compound score ; which  is computed by normalizing these scores. </p>
 
 
 
 <h2>Getting Started</h2>
 <h3>Step 1 – Import the libraries</h3>
 
-<p>Let's begin by importing  NLTK and downloading the Vader lexicon (We only need to do thi once). It may take a little bit of time to download the data from the Internet. Once we've downloaded the Vader lexicon, we should be able to import it and create an instant of it. 
+<p>Let's begin by importing  NLTK and downloading the Vader lexicon (We only need to do thi once). It may take a little bit of time to download the data from the Internet. Once we've downloaded the Vader lexicon, we should be able to import it and create an instant of it.
 <pre>import nltk
 nltk.download ("vader_lexicon")
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -41,16 +41,16 @@ from sklearn.metrics import accuracy_score, confusion_matrix,classification_repo
 <h3>Step 2 – Explore and  prepare the data</h3>
 <p>Our Amazon reviews are stored in a tsv (table separated values) file. The first thing we need to do is read it using pandas</p>
 <pre>df= pd.read_csv("amazonreviews.tsv", sep= '\t')</pre>
-<p>Essentially, our data is in form of labels (pos: for positive and neg: for negative) and reviews. We also need to clean our data and make sure there are no empty rows. So we drop anything that’s missing and we drop the empty whitspace values. </p>
+<p>Essentially, our data is in the form of labels (pos: for positive and neg: for negative) and reviews. We also need to clean our data and make sure there are no empty rows. So we drop anything that’s missing and we drop the empty whitspace values. </p>
 <pre>df.dropna(inplace=True)
 spaces=[]
 for index, label, review in df.itertuples():
-	if type(review)==str:
-		if review.isspace():
-			spaces.append(index)
+    if type(review)==str:
+        if review.isspace():
+            spaces.append(index)
 
 df.drop(spaces, inplace=True)</pre>
-<p>This should give us a disctionary with values for negative , positive, neutral and compound. 
+<p>This should give us a dictionary with values for negative , positive, neutral and compound.
 But since we are more interested in the compound score, we create a new column for it and we score the value of compound from our scores’ dictionary in it.</p>
 <pre>df['compound']= df['scores'].apply(lambda d:d['compound'])</pre>
 <p>Now we will translate the compound score into words by saying if it’s greater than or equal to 0, the review is positive or else it’s negative. </p>
@@ -68,8 +68,8 @@ ax= plt.subplot()
 sns.heatmap(cm, annot=True, fmt='g', ax=ax,cmap='Purples');  #annot=True to annotate cells, ftm='g' to disable scientific notation
 
 # labels, title and ticks
-ax.set_xlabel('Predicted labels');ax.set_ylabel('True labels'); 
-ax.set_title('Confusion Matrix'); 
+ax.set_xlabel('Predicted labels');ax.set_ylabel('True labels');
+ax.set_title('Confusion Matrix');
 ax.xaxis.set_ticklabels(['neg', 'pos']); ax.yaxis.set_ticklabels(['neg', 'pos']);</pre>
 <img src="/static/images/sentiment/confusion.png">
 
@@ -79,14 +79,14 @@ df_report = pd.DataFrame(report).transpose().round(2)
 df_report.style.background_gradient(cmap='Purples').set_precision(2)</pre>
 <img src="/static/images/sentiment/classificationReport.png">
 
-<p>The results show that the F score is 70%. However, we can clearly notice that Vader has a little bit of trouble with negative reviews versus the positive ones as its really hard for it to detect sarcasm.</p>
-	<blockquote>
-		<p></p>
-	</blockquote>
+<p>The results show that the F score is 70%. However, we can clearly notice that Vader has a little bit of trouble with negative reviews versus the positive ones as it's really hard for it to detect sarcasm.</p>
+    <blockquote>
+        <p></p>
+    </blockquote>
 
-	<figure>
-		<img src="">
-	</figure>
+    <figure>
+        <img src="">
+    </figure>
 </article>
 </body>
 </html>

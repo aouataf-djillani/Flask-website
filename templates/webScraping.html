@@ -18,7 +18,7 @@
 	<img src="/static/images/webscraping.jpeg">
 
 	<p>
-		Scraping data from websites has never been easier. Today, we are going to extract NLP interview Q&As from a website. This kind of scraped data could be used as a cheat sheet for future job interviews or as a dataset to train a chatbot that speaks NLP!
+		Scraping data from websites has never been easier. Today, we are going to extract NLP interview Q&As from a website. This kind of scraped data could be used to prepare for future job interviews or as a dataset to train a chatbot that speaks NLP!
 	</p>
 
 	<h2>Libraries used for Web scraping</h2>
@@ -26,11 +26,11 @@
 		<ul>
 <li><strong>Requests:</strong>  Requests is a library used to request access to the website’s content.</li>
 <li><strong>BeautifulSoup:</strong>  Bs4 is a package for parsing HTML and XML documents and extracting their data.</li>
-<li><strong>Pandas:</strong>  Pandas is used to structure the extracted data and store it to many formats.</li></ul></p>
+<li><strong>Pandas:</strong>  Pandas is used to structure the extracted data and store it in many formats.</li></ul></p>
         </ul></p>
-    <h2>Finding the right data sources</h2>
+    <h2>Finding the right data source</h2>
     <p>While choosing the website that contains useful data for any type of project, the first question we need to ask ourselves should be : 
-Is it legal to scrape data from this website ? 
+<strong>Is it legal to scrape data from this website ? </strong>
 Here, we are going to scrape  « Machine Learning Interviews website » to extract the questions, and answers in NLP interviews. The URL for this page is : https://machinelearninginterview.com/natural-language-processing-interview-questions/  
 It is very important to check Whether this website allows data scraping or not. This type of information is found in the website’s “robots.txt” file. All we  need to do is append “/robots.txt” to the URL of the website we want to scrape. </p>
 <p>After that, we can inspect the web page to see, under which html tag the data we want to scrape is nested by right clicking on the element and then clicking on “Inspect”. In our case, the questions are nested in the <a> tag and the answers are inside the "div" tag. Both "div" and "a" are nested in the "li" tag. </p>
