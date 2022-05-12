@@ -3,7 +3,7 @@ from flask_mail import Mail, Message
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField,validators
 from wtforms.validators import DataRequired
-import local_settings
+
 
 mail = Mail()
 app = Flask(__name__)
@@ -15,7 +15,7 @@ MAIL_SERVER = "smtp.gmail.com",
 MAIL_PORT = 465,
 MAIL_USE_SSL= True,
 MAIL_USERNAME= 'aouataf.djillani@gmail.com',
-MAIL_PASSWORD = local_settings.MAIL_PASSWORD
+MAIL_PASSWORD = 'nrekeblekchok94'
 )
 
 mail.init_app(app)
