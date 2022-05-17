@@ -66,6 +66,10 @@ def book():
 @app.route('/sentiment-analysis-with-vader')
 def sentiment():
 	return render_template('sentimentanalysis.html')
+# google verification file 
+@app.route("/google7f3a92e1f8be07e8.html")
+def google_site_verf():
+    return render_template("google7f3a92e1f8be07e8.html")
 
 if __name__=="__main__":
 	app.run(debug=True)
